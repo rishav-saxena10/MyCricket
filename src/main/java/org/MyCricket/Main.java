@@ -1,4 +1,4 @@
-package org.example;
+package org.MyCricket;
 
 public class Main {
     public static void main(String[] args) {
