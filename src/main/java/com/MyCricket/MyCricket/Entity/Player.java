@@ -111,4 +111,22 @@ public class Player {
     public void setBowlingStyle(String bowlingStyle) {
         this.bowlingStyle = bowlingStyle;
     }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", gender='" + gender + '\'' +
+                ", dob=" + dob +
+                ", birthPlace='" + birthPlace + '\'' +
+                ", country='" + country + '\'' +
+                ", role='" + role + '\'' +
+                ", height=" + height +
+                ", weight=" + weight +
+                ", battingStyle='" + battingStyle + '\'' +
+                ", bowlingStyle='" + bowlingStyle + '\'' +
+                '}';
+    }
 }
