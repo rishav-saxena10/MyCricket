@@ -1,8 +1,10 @@
 package com.MyCricket.MyCricket.Entity;
 
+import com.MyCricket.MyCricket.Model.Player;
+
 import java.util.Date;
 
-public class Player {
+public class PlayerEntity {
     private String id;
     private String name;
     private Integer age;
