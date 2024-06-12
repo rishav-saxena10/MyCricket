@@ -53,6 +53,8 @@ public class Player {
     @Column(name = "bowling_style")
     private String bowlingStyle;
 
+    public Player() {}
+
     public Player(PlayerEntity playerEntity) {
         this.name = playerEntity.getName();
         this.age = playerEntity.getAge();

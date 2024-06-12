@@ -26,14 +26,20 @@ public class PlayerController {
     }
 
     @GetMapping(path = "/fetchPlayer/{playerId}")
-    public ResponseEntity<String> fetchPlayerById(@PathVariable(value = "playerId") String playerId) {
+    public ResponseEntity<PlayerEntity> fetchPlayerById(@PathVariable String playerId) {
         log.info(System.out.printf("Player Id: %s", playerId));
-        return ResponseEntity.status(HttpStatus.OK).body("Player fetched successfully");
+        PlayerEntity playerResponse = playerService.fetchPlayerById(playerId);
+        if(playerResponse == null)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(playerResponse);
+        return ResponseEntity.status(HttpStatus.OK).body(playerResponse);
     }
 
     @PutMapping(path = "/updatePlayer/{playerId}")
-    public ResponseEntity<String> updatePlayer(@RequestBody PlayerEntity player) {
+    public ResponseEntity<PlayerEntity> updatePlayer(@PathVariable String playerId, @RequestBody PlayerEntity player) {
         log.info(System.out.printf("Player: %s", player.toString()));
-        return ResponseEntity.status(HttpStatus.OK).body("Player updated successfully");
+        PlayerEntity playerResponse = playerService.updatePlayer(playerId, player);
+        if(playerResponse == null)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(playerResponse);
+        return ResponseEntity.status(HttpStatus.OK).body(playerResponse);
     }
 }

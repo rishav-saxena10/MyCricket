@@ -6,6 +6,8 @@ import com.MyCricket.MyCricket.Repository.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class PlayerService {
     @Autowired
@@ -20,6 +22,22 @@ public class PlayerService {
 
 //        Persist Player model in DB
         Player playerModel = playerRepository.save(this.buildPlayer(playerEntity));
+        return this.convertModelToEntity(playerModel);
+    }
+
+    public PlayerEntity fetchPlayerById(String playerId) {
+        Optional<Player> player = playerRepository.findById(playerId);
+        return player.map(this::convertModelToEntity).orElse(null);
+    }
+
+    public PlayerEntity updatePlayer(String playerId, PlayerEntity playerEntity) {
+        Optional<Player> player = playerRepository.findById(playerId);
+        if(player.isEmpty())
+            return null;
+
+        Player updatedPlayer = this.updatePlayerModel(player.get(), playerEntity);
+        Player playerModel = playerRepository.save(updatedPlayer);
+
         return convertModelToEntity(playerModel);
     }
 
@@ -39,5 +57,32 @@ public class PlayerService {
         playerEntity.setBowlingStyle(player.getBowlingStyle());
 
         return playerEntity;
+    }
+
+    public Player updatePlayerModel(Player playerModel, PlayerEntity playerEntity) {
+        if(!playerEntity.getName().isEmpty())
+            playerModel.setName(playerEntity.getName());
+        if(playerEntity.getAge() != null)
+            playerModel.setAge(playerEntity.getAge());
+        if(!playerEntity.getGender().isEmpty())
+            playerModel.setGender(playerEntity.getGender());
+        if(playerEntity.getDob() != null)
+            playerModel.setDob(playerEntity.getDob());
+        if(!playerEntity.getBirthPlace().isEmpty())
+            playerModel.setBirthPlace(playerEntity.getBirthPlace());
+        if(!playerEntity.getCountry().isEmpty())
+            playerModel.setCountry(playerEntity.getCountry());
+        if(!playerEntity.getRole().isEmpty())
+            playerModel.setRole(playerEntity.getRole());
+        if(playerEntity.getHeight() != null)
+            playerModel.setHeight(playerEntity.getHeight());
+        if(playerEntity.getWeight() != null)
+            playerModel.setWeight(playerEntity.getWeight());
+        if(playerEntity.getBattingStyle() != null)
+            playerModel.setBattingStyle(playerEntity.getBattingStyle());
+        if(playerEntity.getBowlingStyle() != null)
+            playerModel.setBowlingStyle(playerEntity.getBowlingStyle());
+
+        return playerModel;
     }
 }

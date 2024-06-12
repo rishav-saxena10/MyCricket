@@ -7,10 +7,8 @@
     <list default="true" id="11230955-8a7b-4de1-9402-da2c6f0805ba" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/MyCricket/MyCricket/Controller/PlayerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/MyCricket/MyCricket/Controller/PlayerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/MyCricket/MyCricket/Entity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/MyCricket/MyCricket/Entity/PlayerEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/MyCricket/MyCricket/Entity/Rankings/Rankings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/MyCricket/MyCricket/Entity/Rankings/Rankings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/MyCricket/MyCricket/Entity/Statistics/Statistics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/MyCricket/MyCricket/Entity/Statistics/Statistics.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/MyCricket/MyCricket/Entity/Team.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/MyCricket/MyCricket/Entity/Team.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/MyCricket/MyCricket/Model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/MyCricket/MyCricket/Model/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/MyCricket/MyCricket/Service/PlayerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/MyCricket/MyCricket/Service/PlayerService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
