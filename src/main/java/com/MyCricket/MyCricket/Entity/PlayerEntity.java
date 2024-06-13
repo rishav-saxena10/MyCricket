@@ -116,7 +116,7 @@ public class PlayerEntity {
 
     @Override
     public String toString() {
-        return "Player{" +
+        return "PlayerFactory{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", age=" + age +
