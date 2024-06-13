@@ -7,8 +7,9 @@ public class Team {
     private String battingCoach;
     private String bowlingCoach;
     private String fieldingCoach;
-    private Player captain;
-    private Player[] players;
+
+    private PlayerEntity captain;
+    private PlayerEntity[] players;
 
     public String getId() {
         return id;
@@ -58,19 +59,19 @@ public class Team {
         this.fieldingCoach = fieldingCoach;
     }
 
-    public Player getCaptain() {
+    public PlayerEntity getCaptain() {
         return captain;
     }
 
-    public void setCaptain(Player captain) {
+    public void setCaptain(PlayerEntity captain) {
         this.captain = captain;
     }
 
-    public Player[] getPlayers() {
+    public PlayerEntity[] getPlayers() {
         return players;
     }
 
-    public void setPlayers(Player[] players) {
+    public void setPlayers(PlayerEntity[] players) {
         this.players = players;
     }
 }

@@ -1,8 +1,10 @@
 package com.MyCricket.MyCricket.Entity;
 
+import com.MyCricket.MyCricket.Model.Player;
+
 import java.util.Date;
 
-public class Player {
+public class PlayerEntity {
     private String id;
     private String name;
     private Integer age;
@@ -114,7 +116,7 @@ public class Player {
 
     @Override
     public String toString() {
-        return "Player{" +
+        return "PlayerFactory{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", age=" + age +

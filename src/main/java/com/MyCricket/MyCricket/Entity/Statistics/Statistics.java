@@ -1,11 +1,11 @@
 package com.MyCricket.MyCricket.Entity.Statistics;
 
-import com.MyCricket.MyCricket.Entity.Player;
+import com.MyCricket.MyCricket.Entity.PlayerEntity;
 import org.json.simple.JSONObject;
 
 public abstract class Statistics {
     protected String id;
-    protected Player player;
+    protected PlayerEntity player;
     protected String type;
     protected JSONObject stats;
 
@@ -17,11 +17,11 @@ public abstract class Statistics {
         this.id = id;
     }
 
-    public Player getPlayer() {
+    public PlayerEntity getPlayer() {
         return player;
     }
 
-    public void setPlayer(Player player) {
+    public void setPlayer(PlayerEntity player) {
         this.player = player;
     }
 

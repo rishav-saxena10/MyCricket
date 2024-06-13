@@ -1,10 +1,11 @@
 package com.MyCricket.MyCricket.Entity.Rankings;
 
-import com.MyCricket.MyCricket.Entity.Player;
+import com.MyCricket.MyCricket.Entity.PlayerEntity;
+import com.MyCricket.MyCricket.Entity.PlayerEntity;
 
 public abstract class Rankings {
     protected String id;
-    protected Player player;
+    protected PlayerEntity player;
     protected Float points;
 
     public String getId() {
@@ -15,11 +16,11 @@ public abstract class Rankings {
         this.id = id;
     }
 
-    public Player getPlayer() {
+    public PlayerEntity getPlayer() {
         return player;
     }
 
-    public void setPlayer(Player player) {
+    public void setPlayer(PlayerEntity player) {
         this.player = player;
     }
 
