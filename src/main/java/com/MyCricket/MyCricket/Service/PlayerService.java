@@ -6,10 +6,12 @@ import com.MyCricket.MyCricket.Factory.PlayerFactory;
 import com.MyCricket.MyCricket.Model.Player;
 import com.MyCricket.MyCricket.Repository.PlayerRepository;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -59,6 +61,24 @@ public class PlayerService {
         return this.convertModelToEntity(playerModel);
     }
 
+    public void deletePlayer(String playerId) throws BadRequestException {
+        if(playerId == null || playerId.isEmpty())
+            throw new BadRequestException("Invalid Player Id");
+
+        Optional<Player> player = playerRepository.findById(playerId);
+        if(player.isEmpty())
+            throw new EntityNotFoundException("Player not found");
+
+        softDelete(playerId);
+    }
+
+    @Transactional
+    public void softDelete(String playerId) {
+        Player player = playerRepository.findById(playerId).orElseThrow(() -> new EntityNotFoundException("Player not found"));
+        player.softDelete();
+        playerRepository.save(player);
+    }
+
     public Error validatePlayerRequest(PlayerEntity playerEntity) {
         if(playerEntity.getName() == null || playerEntity.getName().isEmpty())
             return new Error("Invalid Player Name");
@@ -100,6 +120,10 @@ public class PlayerService {
         playerEntity.setWeight(player.getWeight());
         playerEntity.setBattingStyle(player.getBattingStyle());
         playerEntity.setBowlingStyle(player.getBowlingStyle());
+        playerEntity.setActive(player.getActive());
+        playerEntity.setCreatedAt(player.getCreatedAt());
+        playerEntity.setUpdatedAt(player.getUpdatedAt());
+        playerEntity.setDeletedAt(player.getDeletedAt());
 
         return playerEntity;
     }
@@ -127,6 +151,7 @@ public class PlayerService {
             playerModel.setBattingStyle(playerEntity.getBattingStyle());
         if(playerEntity.getBowlingStyle() != null)
             playerModel.setBowlingStyle(playerEntity.getBowlingStyle());
+        playerModel.setUpdatedAt(LocalDateTime.now());
 
         return playerModel;
     }

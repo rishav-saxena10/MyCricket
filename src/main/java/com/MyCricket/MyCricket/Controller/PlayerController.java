@@ -71,4 +71,22 @@ public class PlayerController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new Error(e.getMessage()));
         }
     }
+
+    @DeleteMapping(path = "/deletePlayer/{playerId}")
+    public ResponseEntity<?> deletePlayer(@PathVariable String playerId) {
+        try {
+            log.info(System.out.printf("Player Id: %s", playerId));
+            playerService.deletePlayer(playerId);
+            return ResponseEntity.status(HttpStatus.OK).body("Player deleted successfully");
+        }
+        catch (BadRequestException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Error(e.getMessage()));
+        }
+        catch(EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new Error(e.getMessage()));
+        }
+        catch(Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new Error(e.getMessage()));
+        }
+    }
 }

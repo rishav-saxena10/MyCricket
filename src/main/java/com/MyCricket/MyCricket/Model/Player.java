@@ -1,11 +1,9 @@
 package com.MyCricket.MyCricket.Model;
 
 import com.MyCricket.MyCricket.Entity.PlayerEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -13,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Entity
+@Table(name = "players")
 public class Player {
     private static final Logger log = LoggerFactory.getLogger(Player.class);
     @Id
@@ -20,38 +19,57 @@ public class Player {
     @GenericGenerator(name = "custom-generator", strategy = "com.MyCricket.MyCricket.Utils.IDGenerator")
     private String id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "age")
+    @Column(name = "age", nullable = false)
     private Integer age;
 
-    @Column(name = "gender")
+    @Column(name = "gender", nullable = false)
     private String gender;
 
-    @Column(name = "dob")
+    @Column(name = "dob", nullable = false)
     private Date dob;
 
-    @Column(name = "birth_place")
+    @Column(name = "birth_place", nullable = false)
     private String birthPlace;
 
-    @Column(name = "country")
+    @Column(name = "country", nullable = false)
     private String country;
 
-    @Column(name = "role")
+    @Column(name = "role", nullable = false)
     private String role;
 
-    @Column(name = "height")
+    @Column(name = "height", nullable = false)
     private Float height;
 
-    @Column(name = "weight")
+    @Column(name = "weight", nullable = false)
     private Float weight;
 
-    @Column(name = "batting_style")
+    @Column(name = "batting_style", nullable = false)
     private String battingStyle;
 
-    @Column(name = "bowling_style")
+    @Column(name = "bowling_style", nullable = false)
     private String bowlingStyle;
+
+    @Column(name = "is_active", nullable = false, columnDefinition = "boolean default true")
+    private Boolean isActive;
+
+    @Column(name = "created_at", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated_at", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private LocalDateTime updatedAt;
+
+    @Column(name = "deleted_at")
+    private LocalDateTime deletedAt;
+
+    @PrePersist
+    protected void onCreate() {
+        isActive = true;
+        createdAt = LocalDateTime.now();
+        updatedAt = LocalDateTime.now();
+    }
 
     public Player() {}
 
@@ -163,5 +181,42 @@ public class Player {
 
     public void setBowlingStyle(String bowlingStyle) {
         this.bowlingStyle = bowlingStyle;
+    }
+
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public LocalDateTime getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(LocalDateTime deletedAt) {
+        this.deletedAt = deletedAt;
+    }
+
+    public void softDelete() {
+        this.isActive = false;
+        this.deletedAt = LocalDateTime.now();
     }
 }
