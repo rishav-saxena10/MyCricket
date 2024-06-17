@@ -1,8 +1,9 @@
 package com.MyCricket.MyCricket.Controller;
 
 import com.MyCricket.MyCricket.Entity.PlayerEntity;
+import com.MyCricket.MyCricket.Entity.TeamEntity;
 import com.MyCricket.MyCricket.Error.Error;
-import com.MyCricket.MyCricket.Service.PlayerService;
+import com.MyCricket.MyCricket.Service.TeamService;
 import jakarta.persistence.EntityNotFoundException;
 import org.apache.coyote.BadRequestException;
 import org.apache.coyote.Response;
@@ -15,18 +16,18 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/api/")
-public class PlayerController {
+public class TeamController {
     private static final Logger log = LogManager.getLogger(PlayerController.class);
 
     @Autowired
-    private PlayerService playerService;
+    TeamService teamService;
 
-    @PostMapping(path = "/createPlayer")
-    public ResponseEntity<?> createPlayer(@RequestBody PlayerEntity player) {
+    @PostMapping(path = "/createTeam")
+    public ResponseEntity<?> createTeam(@RequestBody TeamEntity team) {
         try {
-            PlayerEntity playerResponse = playerService.createPlayer(player);
-            log.info(System.out.printf("PlayerResponse: %s", playerResponse.toString()));
-            return ResponseEntity.status(HttpStatus.CREATED).body(playerResponse);
+            TeamEntity teamResponse = teamService.createTeam(team);
+            log.info(System.out.printf("TeamResponse: %s", teamResponse.toString()));
+            return ResponseEntity.status(HttpStatus.CREATED).body(teamResponse);
         }
         catch(BadRequestException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Error(e.getMessage()));
@@ -36,12 +37,30 @@ public class PlayerController {
         }
     }
 
-    @GetMapping(path = "/fetchPlayer/{playerId}")
-    public ResponseEntity<?> fetchPlayerById(@PathVariable String playerId) {
+    @GetMapping(path = "/fetchTeam/{teamId}")
+    public ResponseEntity<?> fetchTeamById(@PathVariable String teamId) {
         try {
-            log.info(System.out.printf("Player Id: %s", playerId));
-            PlayerEntity playerResponse = playerService.fetchPlayerById(playerId);
-            return ResponseEntity.status(HttpStatus.OK).body(playerResponse);
+            TeamEntity teamResponse = teamService.fetchTeamById(teamId);
+            log.info(System.out.printf("TeamResponse: %s", teamResponse.toString()));
+            return ResponseEntity.status(HttpStatus.OK).body(teamResponse);
+        }
+        catch(BadRequestException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Error(e.getMessage()));
+        }
+        catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new Error(e.getMessage()));
+        }
+        catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new Error(e.getMessage()));
+        }
+    }
+
+    @PutMapping(path = "updateTeam/{teamId}")
+    public ResponseEntity<?> updateTeam(@PathVariable String teamId, @RequestBody TeamEntity team) {
+        try {
+            TeamEntity teamResponse = teamService.updateTeam(teamId, team);
+            log.info(System.out.printf("Team: %s", team.toString()));
+            return ResponseEntity.status(HttpStatus.OK).body(teamResponse);
         }
         catch (BadRequestException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Error(e.getMessage()));
@@ -54,30 +73,12 @@ public class PlayerController {
         }
     }
 
-    @PutMapping(path = "/updatePlayer/{playerId}")
-    public ResponseEntity<?> updatePlayer(@PathVariable String playerId, @RequestBody PlayerEntity player) {
+    @DeleteMapping(path = "/deleteTeam/{teamId}")
+    public ResponseEntity<?> deleteTeam(@PathVariable String teamId) {
         try {
-            PlayerEntity playerResponse = playerService.updatePlayer(playerId, player);
-            log.info(System.out.printf("PlayerResponse: %s", playerResponse.toString()));
-            return ResponseEntity.status(HttpStatus.OK).body(playerResponse);
-        }
-        catch (BadRequestException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Error(e.getMessage()));
-        }
-        catch(EntityNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new Error(e.getMessage()));
-        }
-        catch(Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new Error(e.getMessage()));
-        }
-    }
-
-    @DeleteMapping(path = "/deletePlayer/{playerId}")
-    public ResponseEntity<?> deletePlayer(@PathVariable String playerId) {
-        try {
-            log.info(System.out.printf("Player Id: %s", playerId));
-            playerService.deletePlayer(playerId);
-            return ResponseEntity.status(HttpStatus.OK).body("Player deleted successfully");
+            log.info(System.out.printf("Team Id: %s", teamId));
+            teamService.deleteTeam(teamId);
+            return ResponseEntity.status(HttpStatus.OK).body("Team deleted successfully");
         }
         catch (BadRequestException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Error(e.getMessage()));

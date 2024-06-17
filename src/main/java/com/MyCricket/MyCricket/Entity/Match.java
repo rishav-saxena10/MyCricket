@@ -4,8 +4,8 @@ import java.util.Date;
 
 public class Match {
     private String id;
-    private Team team;
-    private Team opponentTeam;
+    private TeamEntity teamEntity;
+    private TeamEntity opponentTeamEntity;
     private Venue venue;
     private Date startsAt;
     private String[] umpires;
@@ -21,20 +21,20 @@ public class Match {
         this.id = id;
     }
 
-    public Team getTeam() {
-        return team;
+    public TeamEntity getTeam() {
+        return teamEntity;
     }
 
-    public void setTeam(Team team) {
-        this.team = team;
+    public void setTeam(TeamEntity teamEntity) {
+        this.teamEntity = teamEntity;
     }
 
-    public Team getOpponentTeam() {
-        return opponentTeam;
+    public TeamEntity getOpponentTeam() {
+        return opponentTeamEntity;
     }
 
-    public void setOpponentTeam(Team opponentTeam) {
-        this.opponentTeam = opponentTeam;
+    public void setOpponentTeam(TeamEntity opponentTeamEntity) {
+        this.opponentTeamEntity = opponentTeamEntity;
     }
 
     public Venue getVenue() {

@@ -2,6 +2,7 @@ package com.MyCricket.MyCricket.Entity;
 
 import com.MyCricket.MyCricket.Model.Player;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class PlayerEntity {
@@ -17,6 +18,10 @@ public class PlayerEntity {
     private Float weight;
     private String battingStyle;
     private String bowlingStyle;
+    private Boolean isActive;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    private LocalDateTime deletedAt;
 
     public String getId() {
         return id;
@@ -114,9 +119,41 @@ public class PlayerEntity {
         this.bowlingStyle = bowlingStyle;
     }
 
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public LocalDateTime getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(LocalDateTime deletedAt) {
+        this.deletedAt = deletedAt;
+    }
+
     @Override
     public String toString() {
-        return "PlayerFactory{" +
+        return "PlayerEntity{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", age=" + age +
@@ -129,6 +166,10 @@ public class PlayerEntity {
                 ", weight=" + weight +
                 ", battingStyle='" + battingStyle + '\'' +
                 ", bowlingStyle='" + bowlingStyle + '\'' +
+                ", isActive=" + isActive +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", deletedAt=" + deletedAt +
                 '}';
     }
 }

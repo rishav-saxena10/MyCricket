@@ -6,10 +6,12 @@ import com.MyCricket.MyCricket.Factory.PlayerFactory;
 import com.MyCricket.MyCricket.Model.Player;
 import com.MyCricket.MyCricket.Repository.PlayerRepository;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -21,12 +23,10 @@ public class PlayerService {
     private PlayerRepository playerRepository;
 
     public PlayerEntity createPlayer(PlayerEntity playerEntity) throws Exception {
-//        Add validation here over player entity
         Error err = this.validatePlayerRequest(playerEntity);
         if(err != null)
             throw new BadRequestException(err.getErrorDescription());
 
-//        Persist PlayerFactory model in DB
         Player playerModel = playerRepository.save(playerFactory.buildPlayer(playerEntity));
         return this.convertModelToEntity(playerModel);
     }
@@ -35,7 +35,7 @@ public class PlayerService {
         if(playerId == null || playerId.isEmpty())
             throw new BadRequestException("Invalid Player Id");
 
-        Optional<Player> player = playerRepository.findById(playerId);
+        Optional<Player> player = playerRepository.findActivePlayerById(playerId);
         if(player.isEmpty())
             throw new EntityNotFoundException("Player not found");
         return this.convertModelToEntity(player.get());
@@ -45,7 +45,7 @@ public class PlayerService {
        if(playerId == null || playerId.isEmpty())
            throw new BadRequestException("Invalid Player Id");
 
-        Optional<Player> player = playerRepository.findById(playerId);
+        Optional<Player> player = playerRepository.findActivePlayerById(playerId);
         if(player.isEmpty())
             throw new EntityNotFoundException("Player not found");
 
@@ -57,6 +57,20 @@ public class PlayerService {
         Player playerModel = playerRepository.save(updatedPlayer);
 
         return this.convertModelToEntity(playerModel);
+    }
+
+    public void deletePlayer(String playerId) throws BadRequestException {
+        if(playerId == null || playerId.isEmpty())
+            throw new BadRequestException("Invalid Player Id");
+
+        softDelete(playerId);
+    }
+
+    @Transactional
+    public void softDelete(String playerId) {
+        Player player = playerRepository.findActivePlayerById(playerId).orElseThrow(() -> new EntityNotFoundException("Player not found"));
+        player.softDelete();
+        playerRepository.save(player);
     }
 
     public Error validatePlayerRequest(PlayerEntity playerEntity) {
@@ -100,6 +114,10 @@ public class PlayerService {
         playerEntity.setWeight(player.getWeight());
         playerEntity.setBattingStyle(player.getBattingStyle());
         playerEntity.setBowlingStyle(player.getBowlingStyle());
+        playerEntity.setActive(player.getActive());
+        playerEntity.setCreatedAt(player.getCreatedAt());
+        playerEntity.setUpdatedAt(player.getUpdatedAt());
+        playerEntity.setDeletedAt(player.getDeletedAt());
 
         return playerEntity;
     }
@@ -127,6 +145,7 @@ public class PlayerService {
             playerModel.setBattingStyle(playerEntity.getBattingStyle());
         if(playerEntity.getBowlingStyle() != null)
             playerModel.setBowlingStyle(playerEntity.getBowlingStyle());
+        playerModel.setUpdatedAt(LocalDateTime.now());
 
         return playerModel;
     }

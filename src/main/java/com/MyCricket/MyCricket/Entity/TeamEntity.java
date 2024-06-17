@@ -1,14 +1,19 @@
 package com.MyCricket.MyCricket.Entity;
 
-public class Team {
+import java.time.LocalDateTime;
+
+public class TeamEntity {
     private String id;
     private String name;
     private String headCoach;
     private String battingCoach;
     private String bowlingCoach;
     private String fieldingCoach;
-
-    private PlayerEntity captain;
+    private String captainId;
+    private Boolean isActive;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    private LocalDateTime deletedAt;
     private PlayerEntity[] players;
 
     public String getId() {
@@ -59,12 +64,12 @@ public class Team {
         this.fieldingCoach = fieldingCoach;
     }
 
-    public PlayerEntity getCaptain() {
-        return captain;
+    public String getCaptainId() {
+        return captainId;
     }
 
-    public void setCaptain(PlayerEntity captain) {
-        this.captain = captain;
+    public void setCaptain(String captain) {
+        this.captainId = captain;
     }
 
     public PlayerEntity[] getPlayers() {
@@ -73,5 +78,37 @@ public class Team {
 
     public void setPlayers(PlayerEntity[] players) {
         this.players = players;
+    }
+
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public LocalDateTime getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(LocalDateTime deletedAt) {
+        this.deletedAt = deletedAt;
     }
 }
