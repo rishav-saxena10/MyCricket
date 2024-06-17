@@ -23,12 +23,10 @@ public class PlayerService {
     private PlayerRepository playerRepository;
 
     public PlayerEntity createPlayer(PlayerEntity playerEntity) throws Exception {
-//        Add validation here over player entity
         Error err = this.validatePlayerRequest(playerEntity);
         if(err != null)
             throw new BadRequestException(err.getErrorDescription());
 
-//        Persist PlayerFactory model in DB
         Player playerModel = playerRepository.save(playerFactory.buildPlayer(playerEntity));
         return this.convertModelToEntity(playerModel);
     }
@@ -37,7 +35,7 @@ public class PlayerService {
         if(playerId == null || playerId.isEmpty())
             throw new BadRequestException("Invalid Player Id");
 
-        Optional<Player> player = playerRepository.findById(playerId);
+        Optional<Player> player = playerRepository.findActivePlayerById(playerId);
         if(player.isEmpty())
             throw new EntityNotFoundException("Player not found");
         return this.convertModelToEntity(player.get());
@@ -47,7 +45,7 @@ public class PlayerService {
        if(playerId == null || playerId.isEmpty())
            throw new BadRequestException("Invalid Player Id");
 
-        Optional<Player> player = playerRepository.findById(playerId);
+        Optional<Player> player = playerRepository.findActivePlayerById(playerId);
         if(player.isEmpty())
             throw new EntityNotFoundException("Player not found");
 
@@ -65,16 +63,12 @@ public class PlayerService {
         if(playerId == null || playerId.isEmpty())
             throw new BadRequestException("Invalid Player Id");
 
-        Optional<Player> player = playerRepository.findById(playerId);
-        if(player.isEmpty())
-            throw new EntityNotFoundException("Player not found");
-
         softDelete(playerId);
     }
 
     @Transactional
     public void softDelete(String playerId) {
-        Player player = playerRepository.findById(playerId).orElseThrow(() -> new EntityNotFoundException("Player not found"));
+        Player player = playerRepository.findActivePlayerById(playerId).orElseThrow(() -> new EntityNotFoundException("Player not found"));
         player.softDelete();
         playerRepository.save(player);
     }

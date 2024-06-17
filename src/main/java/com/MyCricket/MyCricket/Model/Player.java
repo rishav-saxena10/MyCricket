@@ -64,13 +64,6 @@ public class Player {
     @Column(name = "deleted_at")
     private LocalDateTime deletedAt;
 
-    @PrePersist
-    protected void onCreate() {
-        isActive = true;
-        createdAt = LocalDateTime.now();
-        updatedAt = LocalDateTime.now();
-    }
-
     public Player() {}
 
     public Player(PlayerEntity playerEntity) {
@@ -213,6 +206,13 @@ public class Player {
 
     public void setDeletedAt(LocalDateTime deletedAt) {
         this.deletedAt = deletedAt;
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        isActive = true;
+        createdAt = LocalDateTime.now();
+        updatedAt = LocalDateTime.now();
     }
 
     public void softDelete() {
