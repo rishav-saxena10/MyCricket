@@ -1,8 +1,11 @@
 package com.MyCricket.MyCricket.Entity;
 
+import com.MyCricket.MyCricket.Model.Player;
+
+import java.time.LocalDateTime;
 import java.util.Date;
 
-public class Player {
+public class PlayerEntity {
     private String id;
     private String name;
     private Integer age;
@@ -15,6 +18,10 @@ public class Player {
     private Float weight;
     private String battingStyle;
     private String bowlingStyle;
+    private Boolean isActive;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    private LocalDateTime deletedAt;
 
     public String getId() {
         return id;
@@ -112,9 +119,41 @@ public class Player {
         this.bowlingStyle = bowlingStyle;
     }
 
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public LocalDateTime getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(LocalDateTime deletedAt) {
+        this.deletedAt = deletedAt;
+    }
+
     @Override
     public String toString() {
-        return "Player{" +
+        return "PlayerEntity{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", age=" + age +
@@ -127,6 +166,10 @@ public class Player {
                 ", weight=" + weight +
                 ", battingStyle='" + battingStyle + '\'' +
                 ", bowlingStyle='" + bowlingStyle + '\'' +
+                ", isActive=" + isActive +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", deletedAt=" + deletedAt +
                 '}';
     }
 }
