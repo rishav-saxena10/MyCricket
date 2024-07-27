@@ -8,34 +8,3 @@ import org.springframework.stereotype.Repository;
 public interface VenueRepository extends JpaRepository<Venue, String> {
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
