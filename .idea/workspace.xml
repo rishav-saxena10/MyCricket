@@ -5,13 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="11230955-8a7b-4de1-9402-da2c6f0805ba" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/MyCricket/MyCricket/Controller/PlayerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/MyCricket/MyCricket/Controller/PlayerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/MyCricket/MyCricket/Entity/Match.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/MyCricket/MyCricket/Entity/Match.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/MyCricket/MyCricket/Entity/Team.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/MyCricket/MyCricket/Entity/TeamEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/MyCricket/MyCricket/Model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/MyCricket/MyCricket/Model/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/MyCricket/MyCricket/Repository/PlayerRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/MyCricket/MyCricket/Repository/PlayerRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/MyCricket/MyCricket/Service/PlayerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/MyCricket/MyCricket/Service/PlayerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/MyCricket/MyCricket/Controller/TeamController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/MyCricket/MyCricket/Controller/TeamController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/MyCricket/MyCricket/Entity/TeamEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/MyCricket/MyCricket/Entity/TeamEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/MyCricket/MyCricket/Factory/TeamFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/MyCricket/MyCricket/Factory/TeamFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/MyCricket/MyCricket/Model/Team.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/MyCricket/MyCricket/Model/Team.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/MyCricket/MyCricket/Service/TeamService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/MyCricket/MyCricket/Service/TeamService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +24,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
+        <option value="HTML File" />
         <option value="Class" />
       </list>
     </option>
@@ -47,9 +50,10 @@
   &quot;keyToString&quot;: {
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;Application.MyCricketApplication.executor&quot;: &quot;Run&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;player-crud&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;team-crud&quot;,
     &quot;ignore_missing_gitignore&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;/Users/rishav.saxena/Documents/Learning/MyCricket/src/main/resources/static&quot;,

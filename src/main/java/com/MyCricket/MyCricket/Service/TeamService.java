@@ -1,21 +1,21 @@
 package com.MyCricket.MyCricket.Service;
 
 import com.MyCricket.MyCricket.Entity.TeamEntity;
-import com.MyCricket.MyCricket.Entity.TeamEntity;
 import com.MyCricket.MyCricket.Error.Error;
 import com.MyCricket.MyCricket.Factory.TeamFactory;
-import com.MyCricket.MyCricket.Model.Player;
-import com.MyCricket.MyCricket.Model.Team;
 import com.MyCricket.MyCricket.Model.Team;
 import com.MyCricket.MyCricket.Repository.TeamRepository;
-import com.MyCricket.MyCricket.Repository.TeamRepository;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -58,9 +58,7 @@ public class TeamService {
         if(err != null)
             throw new BadRequestException(err.getErrorDescription());
 
-        Team updatedTeam = this.updateTeamModel(team.get(), teamEntity);
-        Team teamModel = teamRepository.save(updatedTeam);
-
+        Team teamModel = teamRepository.save(teamFactory.buildTeam(teamEntity));
         return this.convertModelToEntity(teamModel);
     }
 
@@ -91,27 +89,13 @@ public class TeamService {
             return new Error("Invalid Fielding Coach");
         if(teamEntity.getCaptainId() == null || teamEntity.getCaptainId().isEmpty())
             return new Error("Invalid Captain Id");
+        if(teamEntity.getPlayers() == null || teamEntity.getPlayers().isEmpty())
+            return new Error("Invalid Players list");
 
         return null;
     }
 
-    public Team updateTeamModel(Team teamModel, TeamEntity teamEntity) {
-        if(!teamEntity.getName().isEmpty())
-            teamModel.setName(teamEntity.getName());
-        if(teamEntity.getHeadCoach() != null)
-            teamModel.setHeadCoach(teamEntity.getHeadCoach());
-        if(!teamEntity.getBattingCoach().isEmpty())
-            teamModel.setBattingCoach(teamEntity.getBattingCoach());
-        if(teamEntity.getBowlingCoach() != null)
-            teamModel.setBowlingCoach(teamEntity.getBowlingCoach());
-        if(!teamEntity.getFieldingCoach().isEmpty())
-            teamModel.setFieldingCoach(teamEntity.getFieldingCoach());
-        teamModel.setUpdatedAt(LocalDateTime.now());
-
-        return teamModel;
-    }
-
-    public TeamEntity convertModelToEntity(Team team) {
+    public TeamEntity convertModelToEntity(Team team) throws IOException {
         TeamEntity teamEntity = new TeamEntity();
         teamEntity.setId(team.getId());
         teamEntity.setName(team.getName());
@@ -125,7 +109,13 @@ public class TeamService {
         teamEntity.setUpdatedAt(team.getUpdatedAt());
         teamEntity.setDeletedAt(team.getDeletedAt());
 
+        // Create an ObjectMapper instance
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        // Convert JSON string to Java List
+        List<String> playerList = objectMapper.readValue(team.getPlayers(), new TypeReference<List<String>>() {});
+        teamEntity.setPlayers(playerList);
+
         return teamEntity;
     }
-
 }

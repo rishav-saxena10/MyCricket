@@ -1,6 +1,7 @@
 package com.MyCricket.MyCricket.Entity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class TeamEntity {
     private String id;
@@ -10,11 +11,11 @@ public class TeamEntity {
     private String bowlingCoach;
     private String fieldingCoach;
     private String captainId;
+    private List<String> players;
     private Boolean isActive;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private LocalDateTime deletedAt;
-    private PlayerEntity[] players;
 
     public String getId() {
         return id;
@@ -72,11 +73,11 @@ public class TeamEntity {
         this.captainId = captain;
     }
 
-    public PlayerEntity[] getPlayers() {
+    public List<String> getPlayers() {
         return players;
     }
 
-    public void setPlayers(PlayerEntity[] players) {
+    public void setPlayers(List<String> players) {
         this.players = players;
     }
 
