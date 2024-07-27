@@ -1,26 +1,11 @@
 package com.MyCricket.MyCricket.Entity;
 
-import jakarta.persistence.*;
+public class VenueEntity {
 
-@Entity
-@Table(name = "venues")
-public class Venue {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
-
-    @Column(name = "name")
     private String name;
-
-    @Column(name = "city")
     private String city;
-
-    @Column(name = "country")
     private String country;
-
-    public Venue() {
-        super();
-    }
 
     public String getId() {
         return id;
@@ -52,5 +37,15 @@ public class Venue {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    @Override
+    public String toString() {
+        return "VenueEntity{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", city='" + city + '\'' +
+                ", country='" + country + '\'' +
+                '}';
     }
 }
