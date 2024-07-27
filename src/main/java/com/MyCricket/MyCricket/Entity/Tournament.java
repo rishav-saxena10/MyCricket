@@ -9,7 +9,7 @@ public class Tournament {
     private Date startDate;
     private Date finalDate;
     private String host;
-    private Venue[] venues;
+    private VenueEntity[] venues;
     private Match[] matches;
     private PointsTable pointsTable;
 
@@ -61,11 +61,11 @@ public class Tournament {
         this.host = host;
     }
 
-    public Venue[] getVenues() {
+    public VenueEntity[] getVenues() {
         return venues;
     }
 
-    public void setVenues(Venue[] venues) {
+    public void setVenues(VenueEntity[] venues) {
         this.venues = venues;
     }
 
