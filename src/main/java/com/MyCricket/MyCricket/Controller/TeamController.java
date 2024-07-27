@@ -63,7 +63,7 @@ public class TeamController {
     public ResponseEntity<?> updateTeam(@PathVariable String teamId, @RequestBody TeamEntity team) {
         try {
             TeamEntity teamResponse = teamService.updateTeam(teamId, team);
-            log.info(System.out.printf("Team: %s", team.getPlayers().getFirst()));
+            log.info(System.out.printf("Team: %s", team.toString()));
             return ResponseEntity.status(HttpStatus.OK).body(teamResponse);
         }
         catch (BadRequestException e) {

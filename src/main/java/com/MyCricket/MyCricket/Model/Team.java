@@ -8,6 +8,7 @@ import org.hibernate.annotations.GenericGenerator;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@SuppressWarnings("deprecation")
 @Entity
 @Table(name = "teams")
 public class Team {

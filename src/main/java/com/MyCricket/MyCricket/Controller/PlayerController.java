@@ -5,7 +5,6 @@ import com.MyCricket.MyCricket.Error.Error;
 import com.MyCricket.MyCricket.Service.PlayerService;
 import jakarta.persistence.EntityNotFoundException;
 import org.apache.coyote.BadRequestException;
-import org.apache.coyote.Response;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

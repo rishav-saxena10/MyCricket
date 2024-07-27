@@ -6,7 +6,7 @@ public class Match {
     private String id;
     private TeamEntity teamEntity;
     private TeamEntity opponentTeamEntity;
-    private Venue venue;
+    private VenueEntity venue;
     private Date startsAt;
     private String[] umpires;
     private String tvUmpire;
@@ -37,11 +37,11 @@ public class Match {
         this.opponentTeamEntity = opponentTeamEntity;
     }
 
-    public Venue getVenue() {
+    public VenueEntity getVenue() {
         return venue;
     }
 
-    public void setVenue(Venue venue) {
+    public void setVenue(VenueEntity venue) {
         this.venue = venue;
     }
 

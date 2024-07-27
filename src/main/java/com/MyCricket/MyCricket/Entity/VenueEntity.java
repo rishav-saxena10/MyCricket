@@ -1,32 +1,17 @@
 package com.MyCricket.MyCricket.Entity;
 
-import jakarta.persistence.*;
+public class VenueEntity {
 
-@Entity
-@Table(name = "venues")
-public class Venue {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
-    @Column(name = "name")
+    private String id;
     private String name;
-
-    @Column(name = "city")
     private String city;
-
-    @Column(name = "country")
     private String country;
 
-    public Venue() {
-        super();
-    }
-
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -52,5 +37,15 @@ public class Venue {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    @Override
+    public String toString() {
+        return "VenueEntity{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", city='" + city + '\'' +
+                ", country='" + country + '\'' +
+                '}';
     }
 }
