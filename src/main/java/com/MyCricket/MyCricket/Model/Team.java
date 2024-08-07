@@ -1,11 +1,14 @@
 package com.MyCricket.MyCricket.Model;
 
 import com.MyCricket.MyCricket.Entity.TeamEntity;
+import com.MyCricket.MyCricket.Utils.StringListConverter;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
+@SuppressWarnings("deprecation")
 @Entity
 @Table(name = "teams")
 public class Team {
@@ -33,7 +36,8 @@ public class Team {
     @JoinColumn(name = "captain_id", referencedColumnName = "id")
     private Player captain;
 
-//    @Column(name = "team_players", )
+    @Column(name = "players", columnDefinition = "json")
+    private String players;
 
     @Column(name = "is_active", nullable = false, columnDefinition = "boolean default true")
     private Boolean isActive;
@@ -111,6 +115,14 @@ public class Team {
 
     public void setCaptain(Player captain) {
         this.captain = captain;
+    }
+
+    public String getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(String players) {
+        this.players = players;
     }
 
     public Boolean getActive() {

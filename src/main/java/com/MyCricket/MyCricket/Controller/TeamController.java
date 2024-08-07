@@ -1,12 +1,11 @@
 package com.MyCricket.MyCricket.Controller;
 
-import com.MyCricket.MyCricket.Entity.PlayerEntity;
 import com.MyCricket.MyCricket.Entity.TeamEntity;
 import com.MyCricket.MyCricket.Error.Error;
 import com.MyCricket.MyCricket.Service.TeamService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.persistence.EntityNotFoundException;
 import org.apache.coyote.BadRequestException;
-import org.apache.coyote.Response;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +13,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+
 @RestController
 @RequestMapping(value = "/api/")
 public class TeamController {
-    private static final Logger log = LogManager.getLogger(PlayerController.class);
+    private static final Logger log = LogManager.getLogger(TeamController.class);
 
     @Autowired
     TeamService teamService;
@@ -29,8 +30,11 @@ public class TeamController {
             log.info(System.out.printf("TeamResponse: %s", teamResponse.toString()));
             return ResponseEntity.status(HttpStatus.CREATED).body(teamResponse);
         }
-        catch(BadRequestException e) {
+        catch(BadRequestException | JsonProcessingException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Error(e.getMessage()));
+        }
+        catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(new Error(e.getMessage()));
         }
         catch(Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new Error(e.getMessage()));
